@@ -16,6 +16,8 @@
 
 package lambdas
 
+import com.importre.crayon.blue
+
 // Convert a value in miles to inches, feet, and yards using higher order functions
 
 enum class ConvertTo { Inches, Feet, Yards }
@@ -38,7 +40,7 @@ fun toFeet(value: Int) = value * 5280
 fun main(args: Array<String>) {
 
     val miles = 100
-    println("$miles miles")
+    println("$miles miles".blue())
 
     for (key in ConvertTo.values()) {
         print("- ConvertTo.$key = ")

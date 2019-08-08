@@ -1,6 +1,7 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
+
 - [Goal](#goal)
 - [Learnings](#learnings)
 
@@ -12,6 +13,8 @@ Be able to create an internal DSL to create a simple address book, eg:
 
 ```kotlin
 AddressBook {
+
+  name "Personal"
 
   Person {
     name "John Doe"
@@ -30,6 +33,9 @@ AddressBook {
 
 # Learnings
 
-- [ ] Lambdas w/ receivers: https://livebook.manning.com/book/kotlin-in-action/chapter-5/299
+- [ ] [Lambdas w/ receivers](https://livebook.manning.com/book/kotlin-in-action/chapter-5/299)
 - [ ] Operator overloading
 - [ ] DSL
+- Online repl examples:
+  - [High order function, lambda ex](https://pl.kotl.in/1fP6ePqVL)
+  - [Simple DSL ex](https://pl.kotl.in/-lC_hc_Ar)

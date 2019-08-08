@@ -21,3 +21,4 @@ package utils
 fun String.green(): String = "\u001b[32m$this\u001b[0m"
 fun String.red(): String = "\u001b[31m$this\u001b[0m"
 fun String.yellow(): String = "\u001b[33m$this\u001b[0m"
+fun String.log(): Unit = println(this)

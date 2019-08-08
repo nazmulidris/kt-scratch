@@ -20,32 +20,32 @@ package objects
 
 import java.util.*
 
-fun main(args: Array<String>){
-    // Note the following statement won't work:
-    // val instance2 = XYZResource("123")
-    val instance1 = XYZResource.create()
-    println(instance1)
+fun main(args: Array<String>) {
+  // Note the following statement won't work:
+  // val instance2 = XYZResource("123")
+  val instance1 = XYZResource.create()
+  println(instance1)
 
-    // unnamed companion objects are all called "Companion"
-    val instance2 = XYZResource.Companion.create()
-    println(instance2)
+  // unnamed companion objects are all called "Companion"
+  val instance2 = XYZResource.Companion.create()
+  println(instance2)
 
-    println(XYZResource.extfunc())
+  println(XYZResource.extfunc())
 }
 
 // Class has a private constructor, so it can't be created externally
-data class XYZResource private constructor (var id: String) {
+data class XYZResource private constructor(var id: String) {
 
-    // Equivalent of static methods / factory pattern
-    companion object {
-        fun create(): XYZResource {
-            return XYZResource("nazmul"+Random().nextInt(100).toString())
-        }
+  // Equivalent of static methods / factory pattern
+  companion object {
+    fun create(): XYZResource {
+      return XYZResource("nazmul" + Random().nextInt(100).toString())
     }
+  }
 
 }
 
 // Extension function on companion object
 fun XYZResource.Companion.extfunc(): String {
-    return "extension function"
+  return "extension function"
 }

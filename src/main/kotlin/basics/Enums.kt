@@ -18,16 +18,16 @@ package basics
 
 import utils.red
 
-enum class Headers(val id: String){
-    TYPE("Type"),
-    DESC("Description"),
-    XACT("Transaction Date"),
-    POST("Post Date")
+enum class Headers(val id: String) {
+  TYPE("Type"),
+  DESC("Description"),
+  XACT("Transaction Date"),
+  POST("Post Date")
 }
 
-fun main(args: Array<String>){
-    println("item \t item.toStr() \t item.id".red())
-    for (item in Headers.values()){
-        println("$item \t ${item.toString()} \t\t\t ${item.id}")
-    }
+fun main(args: Array<String>) {
+  println("item \t item.toStr() \t item.id".red())
+  for (item in Headers.values()) {
+    println("$item \t $item \t\t\t ${item.id}")
+  }
 }

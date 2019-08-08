@@ -25,12 +25,12 @@ package destructuring
  */
 
 fun main(args: Array<String>) {
-    val pair = Pair(1, "one")
+  val pair = Pair(1, "one")
 
-    val (num, name) = pair
+  val (num, name) = pair
 
-    println("num = $num, name = $name")
-    println("c1 = ${pair.component1()}, c2 = ${pair.component2()}")
+  println("num = $num, name = $name")
+  println("c1 = ${pair.component1()}, c2 = ${pair.component2()}")
 }
 
 // The Pair class is implemented like so:

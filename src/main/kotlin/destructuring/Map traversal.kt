@@ -25,10 +25,10 @@ fun main(args: Array<String>) {
 //     map.put("one", 1)
 //     map.put("two", 2)
 
-    val map = mapOf("one" to 1,
-            "two" to 2)
+  val map = mapOf("one" to 1,
+                  "two" to 2)
 
-    for ((key, value) in map) {
-        println("$key = $value")
-    }
+  for ((key, value) in map) {
+    println("$key = $value")
+  }
 }

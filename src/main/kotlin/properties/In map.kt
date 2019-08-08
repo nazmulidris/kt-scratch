@@ -27,25 +27,25 @@ package properties
 // http://www.baeldung.com/kotlin-delegated-properties
 
 class MyWeatherData(val map: MutableMap<String, Any>) {
-    val zipcode: String by map
-    val currenttemp: Int by map
-    val forecast: List<Int> by map
-    override fun toString():String{
-        return "${zipcode}, ${currenttemp}, ${forecast}"
-    }
+  val zipcode: String by map
+  val currenttemp: Int by map
+  val forecast: List<Int> by map
+  override fun toString(): String {
+    return "${zipcode}, ${currenttemp}, ${forecast}"
+  }
 }
 
-fun main(args: Array<String>){
-    val paloaltoweather = MyWeatherData(
-            // make sure that the key names match the prop names of the class
-            mutableMapOf(
-                    "zipcode" to "94301",
-                    "currenttemp" to 49,
-                    "forecast" to listOf(50,40,60)
-            )
-    )
-    println(paloaltoweather)
-    paloaltoweather.map.set("currenttemp", 70)
-    println(paloaltoweather)
+fun main(args: Array<String>) {
+  val paloaltoweather = MyWeatherData(
+      // make sure that the key names match the prop names of the class
+      mutableMapOf(
+          "zipcode" to "94301",
+          "currenttemp" to 49,
+          "forecast" to listOf(50, 40, 60)
+      )
+  )
+  println(paloaltoweather)
+  paloaltoweather.map.set("currenttemp", 70)
+  println(paloaltoweather)
 
 }

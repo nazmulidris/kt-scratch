@@ -22,88 +22,90 @@ import utils.red
 import java.util.*
 
 fun main(args: Array<String>) {
-    eg1()
-    eg2()
+  eg1()
+  eg2()
 }
 
 fun eg1() {
-    println("example1".red())
+  println("example1".red())
 
-    fun <T> ArrayList<T>.prettyPrint() {
-        println("array = ${this.joinToString(prefix = "{ ", postfix = " }", separator = " | ")}")
+  fun <T> ArrayList<T>.prettyPrint() {
+    println("array = ${this.joinToString(prefix = "{ ",
+                                         postfix = " }",
+                                         separator = " | ")}")
+  }
+
+  val array: ArrayList<Int> = arrayListOf(5, 43, 58858, 2, 3)
+  array.prettyPrint()
+
+  // SAM conversion for Java class Comparator
+  // val comparator = Comparator<Int>{x, y -> x-y }
+
+  // This is the object expression version of the SAM eg above
+  val comparator = object : Comparator<Int> {
+    override fun compare(x: Int, y: Int): Int {
+      return x - y
     }
+  }
+  // lambda version of object expression above
+  // val comparator = Comparator<Int> { x, y -> x - y }
+  Collections.sort(array, comparator)
+  array.prettyPrint()
+  array.sortDescending()
+  array.prettyPrint()
 
-    val array: ArrayList<Int> = arrayListOf(5, 43, 58858, 2, 3)
-    array.prettyPrint()
-
-    // SAM conversion for Java class Comparator
-    // val comparator = Comparator<Int>{x, y -> x-y }
-
-    // This is the object expression version of the SAM eg above
-    val comparator = object : Comparator<Int> {
-        override fun compare(x: Int, y: Int): Int {
-            return x - y
-        }
-    }
-    // lambda version of object expression above
-    // val comparator = Comparator<Int> { x, y -> x - y }
-    Collections.sort(array, comparator)
-    array.prettyPrint()
-    array.sortDescending()
-    array.prettyPrint()
-
-    val obj = object {
-        var x = 0
-        var y = 0
-        fun sum() = x + y
-    }
-    obj.x = 10
-    obj.y = 50
-    println("obj -> x=${obj.x} y=${obj.y} sum=${obj.sum()}")
+  val obj = object {
+    var x = 0
+    var y = 0
+    fun sum() = x + y
+  }
+  obj.x = 10
+  obj.y = 50
+  println("obj -> x=${obj.x} y=${obj.y} sum=${obj.sum()}")
 }
 
 fun eg2() {
-    println("example2".red())
+  println("example2".red())
 
-    val exec = Exec()
+  val exec = Exec()
 
-    //
-    // SAM aka Single Abstract Method only works for Java interfaces.
-    //
-    val r: Runnable = Runnable { println("run") }
-    exec(r)
+  //
+  // SAM aka Single Abstract Method only works for Java interfaces.
+  //
+  val r: Runnable = Runnable { println("run") }
+  exec(r)
 
-    // inline example of above
-    exec(Runnable { println("run2") })
+  // inline example of above
+  exec(Runnable { println("run2") })
 
-    //
-    // For Kotlin interfaces, this is how you do it.
-    //
-    val g = object : MyRunnable {
-        override fun run() {
-            println("run3")
-        }
+  //
+  // For Kotlin interfaces, this is how you do it.
+  //
+  val g = object : MyRunnable {
+    override fun run() {
+      println("run3")
     }
-    exec(g)
+  }
+  exec(g)
 
-    // inline example of above
-    exec(object : MyRunnable {
-        override fun run() {
-            println("run4")
-        }
-    })
+  // inline example of above
+  exec(object : MyRunnable {
+    override fun run() {
+      println("run4")
+    }
+  })
 }
 
 class Exec {
-    operator fun invoke(r: Runnable) {
-        r.run()
-    }
+  operator fun invoke(r: Runnable) {
+    r.run()
+  }
 
-    operator fun invoke(r: MyRunnable) {
-        r.run()
-    }
+  operator fun invoke(r: MyRunnable) {
+    r.run()
+  }
 }
 
 interface MyRunnable {
-    fun run()
+  fun run()
 }

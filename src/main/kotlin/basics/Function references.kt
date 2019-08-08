@@ -24,11 +24,11 @@ package basics
  */
 
 fun main(args: Array<String>) {
-    val numbers = listOf(1, 2, 3)
-    println(numbers.filter(::isOdd))
+  val numbers = listOf(1, 2, 3)
+  println(numbers.filter(::isOdd))
 
-    val names = listOf("maret", "nazmul", "dexter")
-    println(names.filter(::matchesMyName))
+  val names = listOf("maret", "nazmul", "dexter")
+  println(names.filter(::matchesMyName))
 }
 
 fun isOdd(x: Int) = x % 2 != 0

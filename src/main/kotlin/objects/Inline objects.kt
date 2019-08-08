@@ -20,23 +20,24 @@ package objects
 
 fun main(args: Array<String>) {
 
-    // Creating a class and object at the same time (aka singleton)
-    val obj = object {
-        val x=1
-        val y=2
-        fun total(): Int {
-            return x+y
-        }
-        fun introspect() {
-            when (total()){
-                1 -> println("one")
-                is Int -> println("is an Int")
-                else -> println("any num other than one")
-            }
-        }
+  // Creating a class and object at the same time (aka singleton)
+  val obj = object {
+    val x = 1
+    val y = 2
+    fun total(): Int {
+      return x + y
     }
 
-    println("obj.total=${obj.total()}")
-    obj.introspect()
+    fun introspect() {
+      when (total()) {
+        1      -> println("one")
+        is Int -> println("is an Int")
+        else   -> println("any num other than one")
+      }
+    }
+  }
+
+  println("obj.total=${obj.total()}")
+  obj.introspect()
 
 }

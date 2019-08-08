@@ -18,41 +18,41 @@ package basics
 
 fun main(args: Array<String>) {
 
-    val id = "nazmul"
-    println(
-            when (id) {
-                "nazmul" -> "admin"
-                else -> "user"
-            })
+  val id = "nazmul"
+  println(
+      when (id) {
+        "nazmul" -> "admin"
+        else     -> "user"
+      })
 
-    val code = 11
-    when (code) {
-        in 1..10 -> println("small")
-        in 11..20 -> println("medium")
-        in 21..30 -> println("large")
-    }
+  val code = 11
+  when (code) {
+    in 1..10  -> println("small")
+    in 11..20 -> println("medium")
+    in 21..30 -> println("large")
+  }
 
-    // The following does not compile since the items in the when statement
-    // have must be Int, or in a range, or is a specific type
-    //when (code){
-    //    isEven(code) -> println("even")
-    //    else -> println("odd")
-    //}
+  // The following does not compile since the items in the when statement
+  // have must be Int, or in a range, or is a specific type
+  //when (code){
+  //    isEven(code) -> println("even")
+  //    else -> println("odd")
+  //}
 
-    when {
-        isEvenNumber(code) -> println("is even")
-        else -> println("is odd")
-    }
+  when {
+    isEvenNumber(code) -> println("is even")
+    else               -> println("is odd")
+  }
 
-    val somevalue: Any = 12f
-    when (somevalue) {
-        is Int -> print("somevalue is an Int")
-        is String -> print("somevalue is a String")
-        else -> print("somevalue is not an Int or String")
-    }
+  val somevalue: Any = 12f
+  when (somevalue) {
+    is Int    -> print("somevalue is an Int")
+    is String -> print("somevalue is a String")
+    else      -> print("somevalue is not an Int or String")
+  }
 
 }
 
 fun isEvenNumber(num: Int): Boolean {
-    return num % 2 == 0
+  return num % 2 == 0
 }

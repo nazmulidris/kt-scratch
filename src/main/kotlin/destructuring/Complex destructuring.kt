@@ -21,30 +21,30 @@ import utils.red
 import utils.yellow
 
 fun main(args: Array<String>) {
-    simple_destructuring()
-    complex_destructuring()
+  simple_destructuring()
+  complex_destructuring()
 }
 
 // Complex - using a Map
 
 fun complex_destructuring() {
 
-    println(("Complex").red())
+  println(("Complex").red())
 
-    val p1_map: HashMap<String, String> = hashMapOf(
-            "name" to "nazmul", "age" to "43", "email" to "n@fl.com")
+  val p1_map: HashMap<String, String> = hashMapOf(
+      "name" to "nazmul", "age" to "43", "email" to "n@fl.com")
 
-    val p2_map = hashMapOf(
-            "name" to "maret", "age" to "28", "email" to "m@fl.com")
+  val p2_map = hashMapOf(
+      "name" to "maret", "age" to "28", "email" to "m@fl.com")
 
-    val people = listOf(p1_map, p2_map)
+  val people = listOf(p1_map, p2_map)
 
-    people.forEach {
-        for ((key, value) in it) {
-            print(" ${key.yellow()} ${value.green()} ")
-        }
-        println()
+  people.forEach {
+    for ((key, value) in it) {
+      print(" ${key.yellow()} ${value.green()} ")
     }
+    println()
+  }
 
 }
 
@@ -52,26 +52,26 @@ fun complex_destructuring() {
 
 fun simple_destructuring() {
 
-    println(("Simple").red())
+  println(("Simple").red())
 
-    val p1 = Person("nazmul", 43)
-    val p2 = Person("maret", 28)
-    val people = listOf(p1, p2)
+  val p1 = Person("nazmul", 43)
+  val p2 = Person("maret", 28)
+  val people = listOf(p1, p2)
 
-    for (person in people) {
-        val (name, age) = person
-        println("name=$name, age=$age")
-    }
+  for (person in people) {
+    val (name, age) = person
+    println("name=$name, age=$age")
+  }
 
-    for ((name, age) in people) {
-        println("name=$name, age=$age")
-    }
+  for ((name, age) in people) {
+    println("name=$name, age=$age")
+  }
 
-    val (result, status) = people.getPerson("maret")
-    println("status: $status, person: $result")
+  val (result, status) = people.getPerson("maret")
+  println("status: $status, person: $result")
 
-    val (first, second) = people.getPerson(43)
-    println("status: $first, person: $second")
+  val (first, second) = people.getPerson(43)
+  println("status: $first, person: $second")
 
 }
 
@@ -80,17 +80,17 @@ enum class ResultCode { OK, ERR }
 data class Result(val result: Person?, val status: ResultCode)
 
 private fun List<Person>.getPerson(name: String): Result {
-    val result = this.find { it.name == name }
-    return Result(
-            result,
-            if (result == null) ResultCode.ERR else ResultCode.OK
-    )
+  val result = this.find { it.name == name }
+  return Result(
+      result,
+      if (result == null) ResultCode.ERR else ResultCode.OK
+  )
 }
 
 private fun List<Person>.getPerson(age: Int): Pair<ResultCode, Person?> {
-    val result = this.find { it.age == age }
-    return Pair(
-            first = if (result == null) ResultCode.ERR else ResultCode.OK,
-            second = result
-    )
+  val result = this.find { it.age == age }
+  return Pair(
+      first = if (result == null) ResultCode.ERR else ResultCode.OK,
+      second = result
+  )
 }

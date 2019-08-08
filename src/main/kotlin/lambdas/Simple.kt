@@ -20,30 +20,30 @@ package lambdas
 
 fun main(args: Array<String>) {
 
-    // Lambdas
-    val f = {a: Int, b: Int -> a + b}
-    println("f(1, 3) = ${f(1,3)}")
+  // Lambdas
+  val f = { a: Int, b: Int -> a + b }
+  println("f(1, 3) = ${f(1, 3)}")
 
-    val f2 = f
-    println("f2(1, 3) = ${f2(1,3)}")
+  val f2 = f
+  println("f2(1, 3) = ${f2(1, 3)}")
 
-    val f4 = ::f3
-    println("f4(1, 3) = ${f4(1,3)}")
+  val f4 = ::f3
+  println("f4(1, 3) = ${f4(1, 3)}")
 
-    val f5 = {a: Int, b: Int -> a * b}(2,2)
-    println("f5 = $f5")
+  val f5 = { a: Int, b: Int -> a * b }(2, 2)
+  println("f5 = $f5")
 
-    // Higher order functions
-    log(f, 20, 20)
-    log(::f3, 10, 10)
+  // Higher order functions
+  log(f, 20, 20)
+  log(::f3, 10, 10)
 
 }
 
 // Higher order function
-fun log(fp1: (Int, Int)->Int, p1: Int, p2: Int) {
-    println(fp1(p1,p2))
+fun log(fp1: (Int, Int) -> Int, p1: Int, p2: Int) {
+  println(fp1(p1, p2))
 }
 
 fun f3(p1: Int, p2: Int): Int {
-    return p1 * p2
+  return p1 * p2
 }

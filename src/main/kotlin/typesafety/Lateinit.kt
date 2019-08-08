@@ -26,49 +26,54 @@ import java.util.*
 // https://kotlinlang.org/docs/reference/exceptions.html
 
 fun main(args: Array<String>) {
-    var app = Application()
-    with(app) {
-        println(try {getServiceInfo()} catch (e: Throwable) {e})
-        onCreate()
-        onStart()
-        onStop()
-        onDestroy()
-        println(getServiceInfo())
+  var app = Application()
+  with(app) {
+    println(try {
+      getServiceInfo()
     }
+            catch (e: Throwable) {
+              e
+            })
+    onCreate()
+    onStart()
+    onStop()
+    onDestroy()
+    println(getServiceInfo())
+  }
 }
 
 class Application {
-    val id: Int = (100..110).random()
-    lateinit var mService: MyService // var not initialized
+  val id: Int = (100..110).random()
+  lateinit var mService: MyService // var not initialized
 
-    // this throws an exception if the mService var hasn't been initialized yet
-    fun getServiceInfo(): String {
-        return mService.toString()
-    }
+  // this throws an exception if the mService var hasn't been initialized yet
+  fun getServiceInfo(): String {
+    return mService.toString()
+  }
 
-    fun onCreate() {
-        mService = MyService(id, this) // var initialized here
-    }
+  fun onCreate() {
+    mService = MyService(id, this) // var initialized here
+  }
 
-    fun onStart() {
-        println(mService.doTheThing())
-    }
+  fun onStart() {
+    println(mService.doTheThing())
+  }
 
-    fun onStop() {
+  fun onStop() {
 
-    }
+  }
 
-    fun onDestroy() {
+  fun onDestroy() {
 
-    }
+  }
 
 }
 
 class MyService(val app_id: Int, val context: Application) {
-    fun doTheThing(): String = "[app_id:$app_id]: done!"
-    override fun toString(): String {
-        return "$app_id.MyService".green()
-    }
+  fun doTheThing(): String = "[app_id:$app_id]: done!"
+  override fun toString(): String {
+    return "$app_id.MyService".green()
+  }
 }
 
 // utility function that generates a random number, from a range of Int

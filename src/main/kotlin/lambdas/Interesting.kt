@@ -24,11 +24,11 @@ enum class ConvertTo { Inches, Feet, Yards }
 
 /** Returns a function lambda of type `(Int) -> Int` */
 fun pickFunction(value: ConvertTo): (Int) -> Int {
-    return when (value) {
-        ConvertTo.Inches -> ::toInches
-        ConvertTo.Yards -> ::toYards
-        else -> ::toFeet
-    }
+  return when (value) {
+    ConvertTo.Inches -> ::toInches
+    ConvertTo.Yards  -> ::toYards
+    else             -> ::toFeet
+  }
 }
 
 fun toInches(value: Int) = value * 63360
@@ -39,12 +39,12 @@ fun toFeet(value: Int) = value * 5280
 
 fun main(args: Array<String>) {
 
-    val miles = 100
-    println("$miles miles".blue())
+  val miles = 100
+  println("$miles miles".blue())
 
-    for (key in ConvertTo.values()) {
-        print("- ConvertTo.$key = ")
-        println(pickFunction(key)(10))
-    }
+  for (key in ConvertTo.values()) {
+    print("- ConvertTo.$key = ")
+    println(pickFunction(key)(10))
+  }
 
 }

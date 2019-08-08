@@ -18,15 +18,15 @@ package basics
 
 import utils.red
 
-fun main(args: Array<String>){
+fun main(args: Array<String>) {
 
-    // lambda functions
-    println("lambda".red())
-    val sumLambda = { x: Int, y: Int -> x + y }
-    println(sumLambda(1,2))
+  // lambda functions
+  println("lambda".red())
+  val sumLambda = { x: Int, y: Int -> x + y }
+  println(sumLambda(1, 2))
 
-    val list = listOf(1,2,3,4)
-    println(list.filter(::isEven))
+  val list = listOf(1, 2, 3, 4)
+  println(list.filter(::isEven))
 }
 
-fun isEven(i: Int): Boolean = if (i % 2 == 0) true else false
+fun isEven(i: Int): Boolean = i % 2 == 0

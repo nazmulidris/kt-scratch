@@ -18,38 +18,41 @@ package objects
 
 // https://livebook.manning.com/#!/book/kotlin-in-action/chapter-4/86
 
-fun main(args: Array<String>){
-    val clickable: Clickable = Button("btn_1")
-    clickable.click()
-    clickable.somethingCool()
+fun main(args: Array<String>) {
+  val clickable: Clickable = Button("btn_1")
+  clickable.click()
+  clickable.somethingCool()
 }
 
 interface Clickable {
-    val res_id: String
-    fun click()
-    fun somethingCool() {
-        println("$res_id: I am clickable")
-    }
+  val res_id: String
+  fun click()
+  fun somethingCool() {
+    println("$res_id: I am clickable")
+  }
 }
 
-class Button(override val res_id: String): Clickable {
-    override fun click(){ println("Button was clicked!") }
+class Button(override val res_id: String) : Clickable {
+  override fun click() {
+    println("Button was clicked!")
+  }
 
-    class ButtonState: State {
-        override fun saveState(){
-            // note the following line won't work ... nested classes in KT
-            // don't have access to their outer class members
-            // println("saving $res_id")
-            println("saving state")
-        }
-        override fun restoreState(){
-            println("restoring state")
-        }
-
+  class ButtonState : State {
+    override fun saveState() {
+      // note the following line won't work ... nested classes in KT
+      // don't have access to their outer class members
+      // println("saving $res_id")
+      println("saving state")
     }
+
+    override fun restoreState() {
+      println("restoring state")
+    }
+
+  }
 }
 
 interface State {
-    fun saveState()
-    fun restoreState()
+  fun saveState()
+  fun restoreState()
 }

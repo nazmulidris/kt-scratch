@@ -21,16 +21,16 @@ import utils.yellow
 
 fun main(args: Array<String>) {
 
-    // named function arguments
-    println("named args".red())
-    val list = listOf(1, 2, 3, 4)
-    val str = list.joinToString(
-            separator = ", ",
-            prefix = "{",
-            postfix = "}");
-    println(str)
+  // named function arguments
+  println("named args".red())
+  val list = listOf(1, 2, 3, 4)
+  val str = list.joinToString(
+      separator = ", ",
+      prefix = "{",
+      postfix = "}")
+  println(str)
 
-    // string templates
-    println("str templates\nlist=${str.yellow()}, length=${str.length}")
+  // string templates
+  println("str templates\nlist=${str.yellow()}, length=${str.length}")
 
 }

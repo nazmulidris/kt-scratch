@@ -20,31 +20,31 @@ import utils.red
 
 // https://livebook.manning.com/#!/book/kotlin-in-action/chapter-6/138
 
-fun main(args: Array<String>){
-    println("-- unsafe".red())
-    unsafeSendMessageTo("maret@fl.com")
-    unsafeSendMessageTo(null)
+fun main(args: Array<String>) {
+  println("-- unsafe".red())
+  unsafeSendMessageTo("maret@fl.com")
+  unsafeSendMessageTo(null)
 
-    println("-- safe".red())
-    sendMessageTo("n@fl.com")
-    sendMessageTo(null)
+  println("-- safe".red())
+  sendMessageTo("n@fl.com")
+  sendMessageTo(null)
 }
 
 
 // using ?.let
-fun sendMessageTo(email: String?){
-    email?.let{ sendEmailTo(it) }
+fun sendMessageTo(email: String?) {
+  email?.let { sendEmailTo(it) }
 }
 
-fun sendEmailTo(email: String){
-    println("sending email to $email")
+fun sendEmailTo(email: String) {
+  println("sending email to $email")
 }
 
 // NOT using ?.let
-fun unsafeSendMessageTo(email:String?){
-    email.let{ unsafeSendEmailTo(it) }
+fun unsafeSendMessageTo(email: String?) {
+  email.let { unsafeSendEmailTo(it) }
 }
 
-fun unsafeSendEmailTo(email: String?){
-    println(if (email.isNullOrBlank()) "empty" else email!!)
+fun unsafeSendEmailTo(email: String?) {
+  println(if (email.isNullOrBlank()) "empty" else email)
 }

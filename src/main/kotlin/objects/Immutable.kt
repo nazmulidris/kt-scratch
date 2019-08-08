@@ -22,32 +22,32 @@ import utils.red
 // It is preferred to use immutable data classes in Kotlin, and make
 // copies in order to modify
 
-fun main(args: Array<String>){
-    println("-- person entry objs".red())
-    var p1 = PersonEntry("nazmul", 40, "n@fl.com")
-    // the following won't work ... immutable
-    // p1.age = 43
-    var p2 = p1.copy(age = 43)
-    println(p1)
-    println(p2)
+fun main(args: Array<String>) {
+  println("-- person entry objs".red())
+  var p1 = PersonEntry("nazmul", 40, "n@fl.com")
+  // the following won't work ... immutable
+  // p1.age = 43
+  var p2 = p1.copy(age = 43)
+  println(p1)
+  println(p2)
 
-    println("-- address book".red())
-    var addressBook = AddressBook()
-    addressBook.list.add(p1)
-    addressBook.list.add(p2)
-    addressBook.prettyPrint()
+  println("-- address book".red())
+  var addressBook = AddressBook()
+  addressBook.list.add(p1)
+  addressBook.list.add(p2)
+  addressBook.prettyPrint()
 }
 
-data class AddressBook(var list: MutableList<PersonEntry> = mutableListOf()){
-    fun prettyPrint(){
-        for (item in list){
-            println(item)
-        }
+data class AddressBook(var list: MutableList<PersonEntry> = mutableListOf()) {
+  fun prettyPrint() {
+    for (item in list) {
+      println(item)
     }
+  }
 }
 
-data class PersonEntry(val name: String, val age: Int, val email: String?){
-    fun hasEmail(): Boolean {
-        return !email.isNullOrEmpty()
-    }
+data class PersonEntry(val name: String, val age: Int, val email: String?) {
+  fun hasEmail(): Boolean {
+    return !email.isNullOrEmpty()
+  }
 }

@@ -16,33 +16,33 @@
 
 package objects
 
-fun main( args: Array<String> ){
+fun main(args: Array<String>) {
 
-    // Singleton
-    Registry.add(Resource(123, "macbookpro"))
-    Registry.add(Resource(477, "dell xps"))
-    Registry.print()
+  // Singleton
+  Registry.add(Resource(123, "macbookpro"))
+  Registry.add(Resource(477, "dell xps"))
+  Registry.print()
 
-    // Singleton used w/ collection
-    val strings = listOf("abc", "DEF", "aaabbbb", "CCCCC")
-    println(strings.sortedWith(IgnoreCaseStringComparator))
+  // Singleton used w/ collection
+  val strings = listOf("abc", "DEF", "aaabbbb", "CCCCC")
+  println(strings.sortedWith(IgnoreCaseStringComparator))
 
 }
 
 // Singleton (1 class and 1 object)
 object Registry {
 
-    val allResources = arrayListOf<Resource>()
+  val allResources = arrayListOf<Resource>()
 
-    fun add(asset: Resource){
-        allResources.add(asset)
-    }
+  fun add(asset: Resource) {
+    allResources.add(asset)
+  }
 
-    fun print(){
-        for (asset in allResources){
-            println(asset)
-        }
+  fun print() {
+    for (asset in allResources) {
+      println(asset)
     }
+  }
 
 }
 
@@ -50,8 +50,8 @@ data class Resource(val assetTag: Int, val description: String)
 
 // Comparator singleton
 object IgnoreCaseStringComparator : Comparator<String> {
-    override fun compare(p0: String, p1: String): Int{
-        if (p0.toLowerCase() == p1.toLowerCase()) return 0
-        else return -1
-    }
+  override fun compare(p0: String, p1: String): Int {
+    if (p0.toLowerCase() == p1.toLowerCase()) return 0
+    else return -1
+  }
 }

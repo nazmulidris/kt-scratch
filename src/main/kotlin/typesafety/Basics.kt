@@ -21,52 +21,52 @@ import kotlin.math.absoluteValue
 
 fun main(args: Array<String>) {
 
-    var a: String = "notnullable"
-    //a = null
-    printNullableStr(a)
+  var a: String = "notnullable"
+  //a = null
+  printNullableStr(a)
 
-    var b: String? = "nullable"
-    printNullableStr(b)
-    b = null
-    printNullableStr(b)
+  var b: String? = "nullable"
+  printNullableStr(b)
+  b = null
+  printNullableStr(b)
 
-    processList()
+  processList()
 
-    processList2()
+  processList2()
 
-    processList3()
+  processList3()
 }
 
 fun printNullableStr(str: String?) {
-    //print(::str.name)
-    println(if (str == null) "empty string" else "string.length=${str.length}")
+  //print(::str.name)
+  println(if (str == null) "empty string" else "string.length=${str.length}")
 }
 
 // http://beust.com/weblog/2015/10/30/exploring-the-kotlin-standard-library/
 fun processList() {
-    println("== ${::processList.name} ==".red())
-    val listWithNulls: List<String?> = listOf("a", "b", null, "c", null, "d")
-    println("length of list: ${listWithNulls.size}")
-    for (item in listWithNulls) {
-        item?.let { println(it) }
-    }
+  println("== ${::processList.name} ==".red())
+  val listWithNulls: List<String?> = listOf("a", "b", null, "c", null, "d")
+  println("length of list: ${listWithNulls.size}")
+  for (item in listWithNulls) {
+    item?.let { println(it) }
+  }
 }
 
 // http://kotlinlang.org/docs/reference/null-safety.html
 fun processList2() {
-    println("== ${::processList2.name} ==".red())
-    val listWithNulls: List<Int?> = listOf(1, 2, null, 3, 4, 5, null, null)
-    println("length of list: ${listWithNulls.size}, list: $listWithNulls")
-    for (item in listWithNulls) {
-        // elvis operator
-        val i = item?.absoluteValue ?: -1
-        println(i)
-    }
+  println("== ${::processList2.name} ==".red())
+  val listWithNulls: List<Int?> = listOf(1, 2, null, 3, 4, 5, null, null)
+  println("length of list: ${listWithNulls.size}, list: $listWithNulls")
+  for (item in listWithNulls) {
+    // elvis operator
+    val i = item?.absoluteValue ?: -1
+    println(i)
+  }
 }
 
 fun processList3() {
-    println("== ${::processList3.name} ==".red())
-    val listWithNulls: List<Int?> = listOf(1, 2, null, 3, 4, 5, null, null)
-    println("length of list: ${listWithNulls.size}, list: $listWithNulls")
-    listWithNulls.filterNotNull().forEach { println(it) }
+  println("== ${::processList3.name} ==".red())
+  val listWithNulls: List<Int?> = listOf(1, 2, null, 3, 4, 5, null, null)
+  println("length of list: ${listWithNulls.size}, list: $listWithNulls")
+  listWithNulls.filterNotNull().forEach { println(it) }
 }

@@ -26,36 +26,36 @@ import utils.red
  * be computed only in one thread, and that all threads will see the same value.
  */
 
-data class Person2(val name:String, val age:Int)
+data class Person2(val name: String, val age: Int)
 
 // more info
 // http://www.baeldung.com/kotlin-delegated-properties
 
 // complex lazy property delegate
 class PersonSample(name: String, age: Int) {
-    val objRef: Person2 by lazy {
-        println("lazy computed")
-        Person2(name, age)
-    }
+  val objRef: Person2 by lazy {
+    println("lazy computed")
+    Person2(name, age)
+  }
 }
 
 // simple lazy property delegate
 class StringSample {
-    val objRef: String by lazy {
-        println("lazy computed")
-        "SomeString"
-    }
+  val objRef: String by lazy {
+    println("lazy computed")
+    "SomeString"
+  }
 }
 
 fun main(args: Array<String>) {
-    println("-- PersonSample obj created".red())
+  println("-- PersonSample obj created".red())
 
-    val sample = PersonSample("naz", 43)
-    println("lazy = ${sample.objRef}")
-    println("lazy = ${sample.objRef}")
+  val sample = PersonSample("naz", 43)
+  println("lazy = ${sample.objRef}")
+  println("lazy = ${sample.objRef}")
 
-    println("-- StringSample obj created".red())
-    val sample2 = StringSample()
-    println("lazy = ${sample2.objRef}")
-    println("lazy = ${sample2.objRef}")
+  println("-- StringSample obj created".red())
+  val sample2 = StringSample()
+  println("lazy = ${sample2.objRef}")
+  println("lazy = ${sample2.objRef}")
 }

@@ -17,50 +17,50 @@
 package basics
 
 fun main(args: Array<String>) {
-    staticStuff()
-    example1()
+  staticStuff()
+  example1()
 }
 
 fun example1() {
-    fun MutableList<Int>.swap(idx1: Int, idx2: Int) {
-        val tmp = this[idx1]
-        this[idx1] = this[idx2]
-        this[idx2] = tmp
-    }
+  fun MutableList<Int>.swap(idx1: Int, idx2: Int) {
+    val tmp = this[idx1]
+    this[idx1] = this[idx2]
+    this[idx2] = tmp
+  }
 
-    val list = mutableListOf<Int>(1, 2, 3)
-    println("list ... $list")
-    list.swap(0, list.size - 1)
-    println("swap() ... $list")
+  val list = mutableListOf<Int>(1, 2, 3)
+  println("list ... $list")
+  list.swap(0, list.size - 1)
+  println("swap() ... $list")
 
-    fun MutableList<Int>.switch() {
-        swap(0, size - 1)
-    }
-    list.switch()
-    println("switch() ... $list")
+  fun MutableList<Int>.switch() {
+    swap(0, size - 1)
+  }
+  list.switch()
+  println("switch() ... $list")
 
-    fun MutableList<Int>.prettyPrint() {
-        for (index in this.indices) {
-            println("item[$index]=${this[index]}")
-        }
+  fun MutableList<Int>.prettyPrint() {
+    for (index in this.indices) {
+      println("item[$index]=${this[index]}")
     }
-    list.prettyPrint()
+  }
+  list.prettyPrint()
 
 }
 
 fun staticStuff() {
-    open class C
+  open class C
 
-    class D : C()
+  class D : C()
 
-    fun C.foo() = "c"
+  fun C.foo() = "c"
 
-    fun D.foo() = "d"
+  fun D.foo() = "d"
 
-    fun printFoo(c: C) {
-        println(c.foo())
-    }
+  fun printFoo(c: C) {
+    println(c.foo())
+  }
 
-    printFoo(D())
+  printFoo(D())
 
 }

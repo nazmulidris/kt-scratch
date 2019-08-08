@@ -29,34 +29,32 @@ import kotlin.properties.Delegates
 // more info
 // http://www.baeldung.com/kotlin-delegated-properties
 
-data class Person(val name:String, val age:Int)
+data class Person(val name: String, val age: Int)
 
 class Username {
-    // observable delegate that is a more complicated object
-    var user: Person by Delegates.observable(Person("null", -1)) {
-        prop, old, new ->
-        println("user value changed " +
-                "\n\t${old.toString().red()} -> \n\t${new.toString().green()}")
-    }
-    // observable delegate that is a simple string
-    var id: String by Delegates.observable("null"){
-        prop, old, new ->
-        println("id value changed ${old.red()} -> ${new.green()}")
-    }
+  // observable delegate that is a more complicated object
+  var user: Person by Delegates.observable(Person("null",
+                                                  -1)) { prop, old, new ->
+    println("user value changed " +
+            "\n\t${old.toString().red()} -> \n\t${new.toString().green()}")
+  }
+  // observable delegate that is a simple string
+  var id: String by Delegates.observable("null") { prop, old, new ->
+    println("id value changed ${old.red()} -> ${new.green()}")
+  }
 }
 
 class Name {
-    var user: String by Delegates.observable("null") {
-        prop, old, new ->
-        println("user value changed ${old.red()} -> ${new.green()}")
-    }
+  var user: String by Delegates.observable("null") { prop, old, new ->
+    println("user value changed ${old.red()} -> ${new.green()}")
+  }
 }
 
 fun main(args: Array<String>) {
-    val obj1 = Name()
-    obj1.user = "Carl"
+  val obj1 = Name()
+  obj1.user = "Carl"
 
-    val obj2 = Username()
-    obj2.user = Person("naz", 43)
-    obj2.id = "1234"
+  val obj2 = Username()
+  obj2.user = Person("naz", 43)
+  obj2.id = "1234"
 }

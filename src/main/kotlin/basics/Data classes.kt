@@ -20,36 +20,36 @@ import utils.red
 
 fun main(args: Array<String>) {
 
-    println("-- Classes".red())
-    var a1 = Animal(species = Animal.Species.Cat, name = "Kitty", weight = 10)
-    a1.also(::println)
-    a1.also { println(it) }
+  println("-- Classes".red())
+  var a1 = Animal(species = Animal.Species.Cat, name = "Kitty", weight = 10)
+  a1.also(::println)
+  a1.also { println(it) }
 
-    println("-- Data Classes".red())
-    DataExample().demo()
+  println("-- Data Classes".red())
+  DataExample().demo()
 
-    println("-- Phone checkout".red())
-    checkout()
+  println("-- Phone checkout".red())
+  checkout()
 }
 
 // Normal class
 
 class Animal(val species: Species, val name: String, val weight: Int) {
-    init {
-        println("Animal initialized w/ name = $name")
-    }
+  init {
+    println("Animal initialized w/ name = $name")
+  }
 
-    val prop1 = "Name = $name"
-    val prop2 = "Length = ${name.length}"
+  val prop1 = "Name = $name"
+  val prop2 = "Length = ${name.length}"
 
-    override fun toString(): String {
-        val list = listOf(species, name, weight, prop1, prop2)
-        return list.joinToString(prefix = "{", postfix = "}")
-    }
+  override fun toString(): String {
+    val list = listOf(species, name, weight, prop1, prop2)
+    return list.joinToString(prefix = "{", postfix = "}")
+  }
 
-    enum class Species {
-        Cat, Squirrel, Monkey
-    }
+  enum class Species {
+    Cat, Squirrel, Monkey
+  }
 
 }
 
@@ -57,17 +57,30 @@ class Animal(val species: Species, val name: String, val weight: Int) {
 
 class DataExample {
 
-    enum class Gender { Male, Female, Unknown }
-    data class User(val name: String, val age: Int, val email: String, val sex: Gender);
+  enum class Gender { Male, Female, Unknown }
+  data class User(val name: String,
+                  val age: Int,
+                  val email: String,
+                  val sex: Gender
+  )
 
-    fun demo() {
-        var d1 = User(name = "John Wick", age = 50, email = "jw@gmail.com", sex = Gender.Male)
-        println(d1)
-        var d2 = User(name = "Luke Skywalker", age = 50, email = "luke@gmail.com", sex = Gender.Male)
-        var d3 = d2.copy(name = "Leia Skywalker", email = "isuck@gmail.com", sex = Gender.Unknown)
-        println(d2)
-        println(d3)
-    }
+  fun demo() {
+    var d1 = User(name = "John Wick",
+                  age = 50,
+                  email = "jw@gmail.com",
+                  sex = Gender.Male)
+    println(d1)
+    var d2 = User(name = "Luke Skywalker",
+                  age = 50,
+                  email = "luke@gmail.com",
+                  sex = Gender.Male)
+    var d3 = d2
+        .copy(name = "Leia Skywalker",
+              email = "isuck@gmail.com",
+              sex = Gender.Unknown)
+    println(d2)
+    println(d3)
+  }
 
 }
 
@@ -76,24 +89,24 @@ class DataExample {
 data class Invoice(val listOfItems: List<Item>)
 data class Item(val sku: String, val price: Float, val quantity: Int)
 
-fun checkout(){
+fun checkout() {
 
-    val phone1 = Item("Pixel2XL",500f,1)
-    val case1 = Item("Saddleback",100f,1)
-    val headphone1 = Item("EarBuds",50f,1)
+  val phone1 = Item("Pixel2XL", 500f, 1)
+  val case1 = Item("Saddleback", 100f, 1)
+  val headphone1 = Item("EarBuds", 50f, 1)
 
-    val invoice1 = Invoice(listOf(phone1, case1, headphone1))
+  val invoice1 = Invoice(listOf(phone1, case1, headphone1))
 
-    val total = sumOfItems(invoice1)
+  val total = sumOfItems(invoice1)
 
-    print(total)
+  print(total)
 
 }
 
-fun sumOfItems(invoice: Invoice): Float{
-    var total = 0f
-    for (item in invoice.listOfItems){
-        total += item.price * item.quantity
-    }
-    return total
+fun sumOfItems(invoice: Invoice): Float {
+  var total = 0f
+  for (item in invoice.listOfItems) {
+    total += item.price * item.quantity
+  }
+  return total
 }

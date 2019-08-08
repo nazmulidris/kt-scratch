@@ -17,43 +17,43 @@
 package basics
 
 fun main(args: Array<String>) {
-    var pt = Point(1, 1)
-    pt = -pt
-    pt.prettyPrint()
-    pt++
-    pt.prettyPrint()
-    pt + 12
-    pt.prettyPrint()
-    println("in range 0 ... 1000 ${pt in PointRange(0, 1000)}")
+  var pt = Point(1, 1)
+  pt = -pt
+  pt.prettyPrint()
+  pt++
+  pt.prettyPrint()
+  pt + 12
+  pt.prettyPrint()
+  println("in range 0 ... 1000 ${pt in PointRange(0, 1000)}")
 
-    val (x,y) = pt
-    println("x=$x, y=$y")
+  val (x, y) = pt
+  println("x=$x, y=$y")
 }
 
 data class Point(var x: Int, var y: Int) {
-    operator fun unaryMinus(): Point {
-        return Point(-x, -y)
-    }
+  operator fun unaryMinus(): Point {
+    return Point(-x, -y)
+  }
 
-    operator fun inc(): Point {
-        x += 1
-        y += 1
-        return this
-    }
+  operator fun inc(): Point {
+    x += 1
+    y += 1
+    return this
+  }
 
-    operator fun plus(i: Int) {
-        x += i
-        y += i
-    }
+  operator fun plus(i: Int) {
+    x += i
+    y += i
+  }
 
-    fun prettyPrint() {
-        println(this)
-    }
+  fun prettyPrint() {
+    println(this)
+  }
 }
 
 class PointRange(val start: Int, val endInclusive: Int) {
-    operator fun contains(pt: Point): Boolean {
-        val sum = pt.x + pt.y
-        return sum in (start + 1)..(endInclusive - 1)
-    }
+  operator fun contains(pt: Point): Boolean {
+    val sum = pt.x + pt.y
+    return sum in (start + 1)..(endInclusive - 1)
+  }
 }

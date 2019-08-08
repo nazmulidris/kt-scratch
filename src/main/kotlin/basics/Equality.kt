@@ -19,15 +19,15 @@ package basics
 // https://livebook.manning.com/#!/book/kotlin-in-action/chapter-4/214
 
 // In Kotlin == and .equals are the same!
-fun main(args: Array<String>){
+fun main(args: Array<String>) {
 
-    var s1 = "one"
-    var s2 = "two"
-    var s3 = "two"
+  var s1 = "one"
+  var s2 = "two"
+  var s3 = "two"
 
-    println("s1.equals(s2) : ${s1.equals(s2)}")
-    println("s2.equals(s3) : ${s2.equals(s3)}")
-    println("s2 == s3 : ${s2 == s3}")
-    println("s1 == s2 : ${s1 == s2}")
+  println("s1.equals(s2) : ${s1.equals(s2)}")
+  println("s2.equals(s3) : ${s2.equals(s3)}")
+  println("s2 == s3 : ${s2 == s3}")
+  println("s1 == s2 : ${s1 == s2}")
 
 }

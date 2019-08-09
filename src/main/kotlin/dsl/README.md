@@ -33,9 +33,12 @@ AddressBook {
 
 # Learnings
 
-- [ ] [Lambdas w/ receivers](https://livebook.manning.com/book/kotlin-in-action/chapter-5/299)
+- [x] [Lambdas w/ receivers](https://tinyurl.com/y4el4y3a)
 - [ ] Operator overloading
 - [ ] DSL
+    - [x] [Tutorial Part 1](https://tinyurl.com/y2eddjfd)
+    - [x] [Tutorial Part 2](https://tinyurl.com/y3h8m97n)
+
 - Online repl examples:
   - [High order function, lambda ex](https://pl.kotl.in/1fP6ePqVL)
   - [Simple DSL ex](https://pl.kotl.in/-lC_hc_Ar)

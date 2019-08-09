@@ -19,24 +19,8 @@ package dsl_easy
 import utils.log
 import utils.red
 
-data class Person(var name: String? = null,
-                  var age: Int? = null,
-                  var address: Address? = null
-)
-
-data class Address(var street: String? = null,
-                   var number: Int? = null,
-                   var city: String? = null
-)
-
-fun person(block: Person.() -> Unit): Person = Person().apply(block)
-
-fun Person.address(block: Address.() -> Unit) {
-  address = Address().apply(block)
-}
-
 fun main() {
-  "-- Simple DSL --".red().log()
+  "-- dsl_easy --".red().log()
   val p1 = person {
     name = "john doe"
     address {
@@ -50,3 +34,27 @@ fun main() {
   println(p1)
 }
 
+// Person related functions and classes.
+
+data class Person(var name: String? = null,
+                  var age: Int? = null,
+                  var address: Address? = null
+)
+
+fun person(block: Person.() -> Unit): Person {
+  val person = Person()
+  person.block()
+  return person
+  // return Person().apply(block)
+}
+
+// Address related functions and classes.
+
+data class Address(var street: String? = null,
+                   var number: Int? = null,
+                   var city: String? = null
+)
+
+fun Person.address(block: Address.() -> Unit) {
+  address = Address().apply(block)
+}

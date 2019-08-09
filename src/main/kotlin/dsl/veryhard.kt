@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package dsl_difficult
+package dsl_veryhard
 
 import utils.log
 import utils.red
 
 fun main() {
-  "-- Medium DSL --".red().log()
+  "-- dsl_veryhard --".red().log()
 }

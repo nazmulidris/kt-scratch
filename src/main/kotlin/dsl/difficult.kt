@@ -14,39 +14,11 @@
  * limitations under the License.
  */
 
-package dsl
+package dsl_difficult
 
 import utils.log
 import utils.red
 
-data class Person(var name: String? = null,
-                  var age: Int? = null,
-                  var address: Address? = null
-)
-
-data class Address(var street: String? = null,
-                   var number: Int? = null,
-                   var city: String? = null
-)
-
-fun person(block: Person.() -> Unit): Person = Person().apply(block)
-
-fun Person.address(block: Address.() -> Unit) {
-  address = Address().apply(block)
-}
-
 fun main() {
-  "-- Simple DSL --".red().log()
-  val p1 = person {
-    name = "john doe"
-    address {
-      street = "Stewart Drive"
-      number = 123
-      city = "Mountain View"
-    }
-    age = 20
-  }
-
-  println(p1)
+  "-- Medium DSL --".red().log()
 }
-

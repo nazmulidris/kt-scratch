@@ -69,7 +69,7 @@ class PersonBuilder {
       _dateOfBirth = SimpleDateFormat("MM/dd/yyyy").parse(value)
     }
 
-  // address function (for addresses block).
+  // address function (for address block).
   var _addresses = mutableListOf<Address>()
 
   fun address(block: AddressBuilder.() -> Unit) {

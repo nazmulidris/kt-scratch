@@ -21,6 +21,9 @@ import utils.red
 import java.text.SimpleDateFormat
 import java.util.*
 
+@DslMarker
+annotation class PersonDsl
+
 fun main() {
   "-- dsl_veryhard --".red().log()
   val p1 = person {
@@ -57,6 +60,7 @@ data class Person(val name: String,
                   val addresses: List<Address>
 )
 
+@PersonDsl
 class PersonBuilder {
   // name property.
   var name = ""
@@ -102,6 +106,7 @@ data class Address(val street: String,
                    val city: String
 )
 
+@PersonDsl
 class AddressBuilder {
   var street = ""
   var number = 0

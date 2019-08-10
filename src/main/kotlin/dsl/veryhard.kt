@@ -70,7 +70,7 @@ class PersonBuilder {
     }
 
   // address function (for address block).
-  var _addresses = mutableListOf<Address>()
+  private var _addresses = mutableListOf<Address>()
 
   fun address(block: AddressBuilder.() -> Unit) {
     _addresses.add(AddressBuilder().apply(block).build())

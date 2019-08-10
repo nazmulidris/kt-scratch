@@ -18,7 +18,96 @@ package dsl_veryhard
 
 import utils.log
 import utils.red
+import java.text.SimpleDateFormat
+import java.util.*
 
 fun main() {
   "-- dsl_veryhard --".red().log()
+  val p1 = person {
+    name = "john doe"
+    dateOfBirth = "01/02/2010"
+    addresses {
+      address {
+        street = "Some Drive"
+        number = 123
+        city = "Sunnyvale"
+      }
+      address {
+        street = "Another Avenue"
+        number = 1600
+        city = "Mountain View"
+      }
+    }
+  }
+
+  val a1 = address {
+    street = "Some Drive"
+    number = 123
+    city = "Mountain View"
+  }
+
+  println(p1)
+  println(a1)
 }
+
+// Person related functions and classes.
+
+data class Person(val name: String,
+                  val dateOfBirth: Date,
+                  val addresses: List<Address>
+)
+
+class PersonBuilder {
+  // name property.
+  var name = ""
+
+  // dateOfBirth property (w/ backing field).
+  private var _dateOfBirth: Date = Date()
+  var dateOfBirth: String
+    get() = _dateOfBirth.toString()
+    set(value) {
+      _dateOfBirth = SimpleDateFormat("MM/dd/yyyy").parse(value)
+    }
+
+  // address function (for addresses block).
+  var _addresses = mutableListOf<Address>()
+
+  fun address(block: AddressBuilder.() -> Unit) {
+    _addresses.add(AddressBuilder().apply(block).build())
+  }
+
+  // addresses function (for addresses block).
+  fun addresses(block: Addresses.() -> Unit) {
+    Addresses(_addresses).apply(block)
+  }
+
+  class Addresses(val list: MutableList<Address>) {
+    fun address(block: AddressBuilder.() -> Unit) =
+        list.add(AddressBuilder().apply(block).build())
+  }
+
+  // Build immutable Person object.
+  fun build() = Person(name, _dateOfBirth, _addresses)
+
+}
+
+fun person(block: PersonBuilder.() -> Unit): Person {
+  return PersonBuilder().apply(block).build()
+}
+
+// Address related functions and classes.
+
+data class Address(val street: String,
+                   val number: Int,
+                   val city: String
+)
+
+class AddressBuilder {
+  var street = ""
+  var number = 0
+  var city = ""
+  fun build() = Address(street, number, city)
+}
+
+fun address(block: AddressBuilder.() -> Unit) =
+    AddressBuilder().apply(block).build()

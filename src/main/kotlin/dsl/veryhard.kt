@@ -82,12 +82,12 @@ class PersonBuilder {
 
   // addresses function (for addresses block).
   fun addresses(block: Addresses.() -> Unit) {
-    Addresses(_addresses).apply(block)
+    Addresses().apply(block)
   }
 
-  class Addresses(val list: MutableList<Address>) {
+  inner class Addresses {
     fun address(block: AddressBuilder.() -> Unit) =
-        list.add(AddressBuilder().apply(block).build())
+        _addresses.add(AddressBuilder().apply(block).build())
   }
 
   // Build immutable Person object.

@@ -38,6 +38,7 @@ AddressBook {
 - [ ] DSL
     - [x] [Tutorial Part 1](https://tinyurl.com/y2eddjfd)
     - [x] [Tutorial Part 2](https://tinyurl.com/y3h8m97n)
+    - [x] [Socket example](https://tinyurl.com/y69k28rh)
 
 - Online repl examples:
   - [High order function, lambda ex](https://pl.kotl.in/1fP6ePqVL)

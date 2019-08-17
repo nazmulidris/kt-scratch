@@ -26,6 +26,18 @@ fun main() {
   runSynchronous()
 }
 
+fun runSynchronous() {
+  execute(::api_debug, "boo")
+  execute(::api_ipify)
+  execute(::api_nominatim, "mountain view, ca")
+}
+
+fun runAsynchronous() {
+
+}
+
+// API function implementations.
+
 fun api_debug(vararg args: Any?): String = args.joinToString()
 
 fun api_ipify(vararg args: Any?): String {
@@ -43,29 +55,21 @@ fun api_nominatim(vararg args: Any?): String {
   return URL(url).readText()
 }
 
-fun runSynchronous() {
-  makeNetworkRequest(::api_debug, "boo")
-  makeNetworkRequest(::api_ipify)
-  makeNetworkRequest(::api_nominatim, "mountain view, ca")
-}
+// Driver that takes an API function and executes it w/ metering.
 
-fun makeNetworkRequest(api: KFunction<Any>, vararg args: Any?): Any {
-  println("makeNetworkRequest using api: ${api.name}")
+fun execute(apiFunction: KFunction<Any>, vararg args: Any?): Any {
   val startTime = System.currentTimeMillis()
-  println("makeNetworkRequest on thread: ${Thread.currentThread()}")
+  println("execute using apiFunction: ${apiFunction.name}")
+  println("execute on thread: ${Thread.currentThread()}")
   try {
-    val response: Any = api.call(args)
+    val response: Any = apiFunction.call(args)
     println("response = ${response}")
     return response
   }
   finally {
     val endTime = System.currentTimeMillis()
     val timeTaken = (endTime - startTime)
-    println("makeNetworkRequest is done (with either error or success) in " +
+    println("execute is done (with either error or success) in " +
             "${timeTaken} ms")
   }
-}
-
-fun runAsynchronous() {
-
 }

@@ -10,6 +10,7 @@ repositories {
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     compile 'com.importre:crayon:0.1.0'
+  compile "org.jetbrains.kotlin:kotlin-reflect:1.3.41"
 }
 group 'kt-scratch'
 version '1.0-SNAPSHOT'

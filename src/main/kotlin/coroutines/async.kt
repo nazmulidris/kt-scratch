@@ -14,26 +14,32 @@
  * limitations under the License.
  */
 
-package coroutines
+package coroutines_async
 
+import com.importre.crayon.blue
+import kotlinx.coroutines.*
 import utils.red
 import java.net.URL
 import java.net.URLEncoder
 import kotlin.reflect.KFunction
 
 fun main() {
-  println("-- coroutines basic".red())
-  runSynchronous()
-}
-
-fun runSynchronous() {
-  execute(::api_debug, "boo")
-  execute(::api_ipify)
-  execute(::api_nominatim, "mountain view, ca")
+  println("-- asynchronous".red())
+  coroutines_sync.runTimedBlock("runSynchronous") {
+    runAsynchronous()
+  }
 }
 
 fun runAsynchronous() {
-
+  runBlocking {
+    GlobalScope.launch(Dispatchers.IO) {
+      val deferredList = mutableListOf<Deferred<Any>>()
+      deferredList += async { execute(::api_debug, "boo") }
+      deferredList += async { execute(::api_ipify) }
+      deferredList += async { execute(::api_nominatim, "mountain view, ca") }
+      deferredList.forEach { it.await() }
+    }.join()
+  }
 }
 
 // API function implementations.
@@ -57,19 +63,24 @@ fun api_nominatim(vararg args: Any?): String {
 
 // Driver that takes an API function and executes it w/ metering.
 
-fun execute(apiFunction: KFunction<Any>, vararg args: Any?): Any {
+suspend fun execute(apiFunction: KFunction<Any>, vararg args: Any?): Any =
+    runTimedBlock("execute-function") {
+      println("execute using apiFunction: ${apiFunction.name}")
+      println("execute on thread: ${Thread.currentThread()}")
+      val response: Any = apiFunction.call(args)
+      println("response = ${response}")
+      response
+    }
+
+// Utils.
+
+fun runTimedBlock(name: String, block: () -> Any): Any {
   val startTime = System.currentTimeMillis()
-  println("execute using apiFunction: ${apiFunction.name}")
-  println("execute on thread: ${Thread.currentThread()}")
   try {
-    val response: Any = apiFunction.call(args)
-    println("response = ${response}")
-    return response
+    return block()
   }
   finally {
     val endTime = System.currentTimeMillis()
-    val timeTaken = (endTime - startTime)
-    println("execute is done (with either error or success) in " +
-            "${timeTaken} ms")
+    println("$name block took ${endTime - startTime} ms to run".blue())
   }
 }

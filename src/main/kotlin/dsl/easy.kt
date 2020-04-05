@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Nazmul Idris. All rights reserved.
+ * Copyright 2020 Nazmul Idris. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ fun main() {
   "-- dsl_easy --".red().log()
   val p1 = person {
     name = "john doe"
-    address {
+    address = address {
       street = "Stewart Drive"
       number = 123
       city = "Mountain View"
@@ -45,7 +45,7 @@ fun person(block: Person.() -> Unit): Person {
   val person = Person()
   person.block()
   return person
-  // return Person().apply(block)
+  // The lines above are equivalent to: `return Person().apply(block)`
 }
 
 // Address related functions and classes.
@@ -55,6 +55,4 @@ data class Address(var street: String? = null,
                    var city: String? = null
 )
 
-fun Person.address(block: Address.() -> Unit) {
-  address = Address().apply(block)
-}
+fun address(block: Address.() -> Unit): Address = Address().apply(block)

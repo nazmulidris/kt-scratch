@@ -19,15 +19,14 @@ package dsl
 fun main() {
   console {
     line {
+      add(it.Green("msg1"))
+      add(Blue("msg2"))
+    }.println()
+    printLine {
       span(Green, "msg1")
       span(Red, "msg2")
       span(Blue, "msg3")
-    }.println()
-    line {
-      span(Green, "msg1")
-      span(Red, "msg2")
-      span(Blue, "msg3")
-    }.println()
+    }
   }
 }
 
@@ -38,16 +37,22 @@ fun console(block: ConsoleLogContext.() -> Unit) {
 }
 
 class ConsoleLogContext {
-  fun line(block: MutableList<String>.() -> Unit): String {
+  fun printLine(block: MutableList<String>.() -> Unit) {
     val sb = mutableListOf<String>()
-    sb.apply(block)
+    block(sb)
+    println(sb)
+  }
+
+  fun line(block: MutableList<String>.(ConsoleLogContext) -> Unit): String {
+    val sb = mutableListOf<String>()
+    block(sb, this)
     return sb.toString()
   }
 
   /**
    * Appends all arguments to the given [MutableList].
    */
-  fun MutableList<String>.span(color: String, text: String): MutableList<String> {
+  fun MutableList<String>.span(color: Color, text: String): MutableList<String> {
     add(buildString {
       append(color)
       append(text)
@@ -55,13 +60,18 @@ class ConsoleLogContext {
     return this
   }
 
-  val Reset = "\u001B[0m";
-  val Black = "\u001B[30";
-  val Red = "\u001B[31";
-  val Green = "\u001B[32";
-  val Yellow = "\u001B[33";
-  val Blue = "\u001B[34";
-  val Purple = "\u001B[35";
-  val Cyan = "\u001B[36";
-  val White = "\u001B[37";
+  val Black = Color("\u001B[30")
+  val Red = Color("\u001B[31")
+  val Green = Color("\u001B[32")
+  val Yellow = Color("\u001B[33")
+  val Blue = Color("\u001B[34")
+  val Purple = Color("\u001B[35")
+  val Cyan = Color("\u001B[36")
+  val White = Color("\u001B[37")
+}
+
+data class Color(val ansiColorCode: String) {
+  private val RESET = "\u001B[0m";
+  override fun toString(): String = ansiColorCode
+  operator fun invoke(msg: String): String = "$ansiColorCode$msg$RESET"
 }

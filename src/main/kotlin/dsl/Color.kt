@@ -16,6 +16,7 @@
 
 package dsl
 
+import dsl.ConsoleLogContext.Companion.console
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -26,20 +27,23 @@ fun main() {
       span(Red, "msg2")
       span(Blue, "msg3")
     }
-    line {
-      add(it.Green("msg1"))
-      add(Blue("msg2"))
-    }.println()
+    println(
+        line {
+          add(it.Green("msg1"))
+          add(Blue("msg2"))
+        })
   }
 }
 
-private fun String.println() = println(this)
-
-fun console(block: ConsoleLogContext.() -> Unit) {
-  ConsoleLogContext().apply(block)
-}
-
 class ConsoleLogContext {
+  companion object {
+    fun console(block: ConsoleLogContext.() -> Unit) {
+      ConsoleLogContext().apply(block)
+    }
+
+    const val ANSI_RESET = "\u001B[0m";
+  }
+
   fun printLine(block: MutableList<String>.() -> Unit) {
     println(line {
       block(this)
@@ -60,7 +64,7 @@ class ConsoleLogContext {
     add(buildString {
       append(color)
       append(text)
-      append(RESET)
+      append(ANSI_RESET)
     })
     return this
   }
@@ -73,11 +77,11 @@ class ConsoleLogContext {
   val Purple = Color("\u001B[35")
   val Cyan = Color("\u001B[36")
   val White = Color("\u001B[37")
+
+  data class Color(val ansiColorCode: String) {
+    override fun toString(): String = ansiColorCode
+    operator fun invoke(msg: String): String = "$ansiColorCode$msg$ANSI_RESET"
+  }
 }
 
-val RESET = "\u001B[0m";
 
-data class Color(val ansiColorCode: String) {
-  override fun toString(): String = ansiColorCode
-  operator fun invoke(msg: String): String = "$ansiColorCode$msg$RESET"
-}

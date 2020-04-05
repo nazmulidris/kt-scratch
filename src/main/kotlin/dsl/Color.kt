@@ -16,17 +16,20 @@
 
 package dsl
 
+import java.text.SimpleDateFormat
+import java.util.*
+
 fun main() {
   console {
+    printLine {
+      span(Purple, "msg1")
+      span(Red, "msg2")
+      span(Blue, "msg3")
+    }
     line {
       add(it.Green("msg1"))
       add(Blue("msg2"))
     }.println()
-    printLine {
-      span(Green, "msg1")
-      span(Red, "msg2")
-      span(Blue, "msg3")
-    }
   }
 }
 
@@ -38,15 +41,16 @@ fun console(block: ConsoleLogContext.() -> Unit) {
 
 class ConsoleLogContext {
   fun printLine(block: MutableList<String>.() -> Unit) {
-    val sb = mutableListOf<String>()
-    block(sb)
-    println(sb)
+    println(line {
+      block(this)
+    })
   }
 
   fun line(block: MutableList<String>.(ConsoleLogContext) -> Unit): String {
     val sb = mutableListOf<String>()
     block(sb, this)
-    return sb.toString()
+    val timestamp = SimpleDateFormat("hh:mm:sa").format(Date())
+    return sb.joinToString(separator = ", ", prefix = "$timestamp: ")
   }
 
   /**
@@ -56,6 +60,7 @@ class ConsoleLogContext {
     add(buildString {
       append(color)
       append(text)
+      append(RESET)
     })
     return this
   }
@@ -70,8 +75,9 @@ class ConsoleLogContext {
   val White = Color("\u001B[37")
 }
 
+val RESET = "\u001B[0m";
+
 data class Color(val ansiColorCode: String) {
-  private val RESET = "\u001B[0m";
   override fun toString(): String = ansiColorCode
   operator fun invoke(msg: String): String = "$ansiColorCode$msg$RESET"
 }

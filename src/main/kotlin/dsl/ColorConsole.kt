@@ -21,14 +21,14 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 fun main() {
-  console {
-    printLine {
+  console {//this: ConsoleLogContext
+    printLine {//this: MutableList<String>
       span(Purple, "msg1")
       span(Red, "msg2")
       span(Blue, "msg3")
     }
     println(
-        line {
+        line {//this: MutableList<String>, it: ConsoleLogContext
           add(it.Green("msg1"))
           add(Blue("msg2"))
         })

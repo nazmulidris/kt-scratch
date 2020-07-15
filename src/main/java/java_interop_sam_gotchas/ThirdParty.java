@@ -14,33 +14,31 @@
  * limitations under the License.
  */
 
-buildscript {
-  ext.kotlin_version = '1.3.41'
+package java_interop_sam_gotchas;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public final class ThirdParty {
+
+public static final String TAG = "ThirdParty";
+
+public List<Callback> callbacks = new ArrayList<>();
+
+public void addCallback(Callback callback) {
+  Log.d(TAG, "addCallback: " + callback);
+
+  callbacks.add(callback);
 }
 
-plugins {
-  id 'org.jetbrains.kotlin.jvm' version '1.3.41'
+public void removeCallback(Callback callback) {
+  Log.d(TAG, "removeCallback: " + callback);
+
+  callbacks.remove(callback);
 }
 
-group 'kt-scratch'
-version '1.0-SNAPSHOT'
-
-repositories {
-  mavenCentral()
-  jcenter()
+public void printState() {
+  Log.d("ThirdParty", "Callbacks count: " + callbacks.size());
 }
 
-dependencies {
-  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-  implementation 'com.importre:crayon:0.1.0'
-  implementation "org.jetbrains.kotlin:kotlin-reflect:1.3.41"
-  implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.0-RC2'
-  implementation 'com.willowtreeapps.assertk:assertk-jvm:0.21'
-}
-
-compileKotlin {
-  kotlinOptions.jvmTarget = "1.8"
-}
-compileTestKotlin {
-  kotlinOptions.jvmTarget = "1.8"
 }

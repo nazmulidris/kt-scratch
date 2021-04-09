@@ -7,6 +7,7 @@
 - [Free IP address lookup API](https://www.ipify.org)
 
 ## OpenStreetMaps API
+
 - https://nominatim.org/release-docs/develop/api/Overview/
 - https://nominatim.org/release-docs/develop/api/Search/
 
